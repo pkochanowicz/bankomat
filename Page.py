@@ -2,22 +2,21 @@ from tkinter import *
 from Image import ImageButton
 from ToolTip import ToolTip
 
+
 class Page():
     @staticmethod
     def find_default_images(): ##metoda zwracajaca domyslne elementy GUI jako słownik
         global wplata_image,wyplata_image,stan_konta_image, interface_image, safety_image, button_test  # definicja zmiennych globalnych (PhotoImage Objects do not get garbage-collected)
-        wyplata_image = ImageButton.find_image("button_wyplata.png", 175, 47, "Tutaj wyjaśniamy funkcje wypłacania gotówki z bankomatu.")
-        wplata_image = ImageButton.find_image("button_wplata.png", 175, 47,"Tutaj wyjaśniamy funkcje wpłacania gotówki do bankomatu.")
-        stan_konta_image = ImageButton.find_image("button_stan.png", 175, 47, "Tutaj pokazujemy jak sprawdzić stan swojego konta bankowego.")
-        interface_image = ImageButton.find_image("button_interface.png", 175, 47, "Tutaj wyjaśnione są funkcje poszczególnych części fizycznych bankomatu.")
-        button_test = ImageButton.find_image("button_test.png", 72, 72, "Test wiedzy, sprawdzający zrozumienie zagadnień wyjaśnionych w instruktarzu.")
-        safety_image = ImageButton.find_image("button_exclamation.png", 72, 72, "Zasady bezpieczeństwa podczas korzystania z bankomatu.")
-
+        wyplata_image = ImageButton.find_image("button_wyplata.png", 175, 47, "Wyjaśnienie funkcji wypłaty gotówki z bankomatu.")
+        wplata_image = ImageButton.find_image("button_wplata.png", 175, 47,"Wyjaśnienie funkcji wpłaty gotówki do bankomatu.")
+        stan_konta_image = ImageButton.find_image("button_stan.png", 175, 47, "Sprawdzanie stanu swojego konta bankowego.")
+        interface_image = ImageButton.find_image("button_interface.png", 175, 47, "Wyjaśnienie funkcji poszczególnych części fizycznych bankomatu.")
+        button_test = ImageButton.find_image("button_test.png", 72, 72, "Test wiedzy, sprawdzający zrozumienie zagadnień z instruktarzu.")
+        safety_image = ImageButton.find_image("button_exclamation.png", 72, 72, "Zasady bezpiecznego korzystania z bankomatu.")
 
         return [wplata_image, wyplata_image, stan_konta_image, interface_image, button_test, safety_image]
 
-    @staticmethod
-    def create_tool_tip(widget, text):
+    def create_tool_tip(self, widget, text):
         toolTip = ToolTip(widget)
 
         def enter(event):
@@ -29,8 +28,7 @@ class Page():
         widget.bind('<Enter>', enter)
         widget.bind('<Leave>', leave)
 
-
-    def __init__(self):                 ## konstruktor tworzący glowne okno aplikacji
+    def __init__(self):                 # konstruktor tworzący glowne okno aplikacji
         root = Tk()
         root.title("Nauka obsługi bankomatu")
         root.geometry("700x792")
@@ -41,7 +39,7 @@ class Page():
         self.create_launch_buttons(root)
         root.mainloop()
 
-    def create_launch_buttons(self, window): ## funkcja tworząca przyciski symulujące bankomat
+    def create_launch_buttons(self, window):    # funkcja tworząca przyciski symulujące bankomat
         buttons_images = self.find_default_images()
         buttons = [None] * len(buttons_images)
         frames = [None] * len(buttons_images)
