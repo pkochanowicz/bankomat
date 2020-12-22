@@ -1,6 +1,5 @@
-import pyttsx3
-import threading
 from tkinter import *
+from SynthSpeech import SynthSpeech
 
 
 class ToolTip(object):
@@ -9,10 +8,9 @@ class ToolTip(object):
         self.tipwindow = None
         self.id = None
         self.x = self.y = 0
-        self.engine = pyttsx3.init()
-        self.engine.setProperty('rate', 120)
+        self.speech_engine = SynthSpeech()
 
-    def showtip(self, text):
+    def show_tip(self, text):
         self.text = text
         if self.tipwindow or not self.text:
             return
@@ -26,22 +24,11 @@ class ToolTip(object):
                       background="#ffffe0", relief=SOLID, borderwidth=1,
                       font=("tahoma", "8", "normal"))
         label.pack(ipadx=1)
-        self.print(text)
+        self.speech_engine.start_synth_speech_thread(text)
 
-    def hidetip(self):
+    def hide_tip(self):
         tw = self.tipwindow
         self.tipwindow = None
         if tw:
             tw.destroy()
 
-    def print(self, instance):
-        threading.Thread(
-            target=self.pyttsx3_speech, args=(self.text,), daemon=True
-        ).start()
-
-    def pyttsx3_speech(self, text):
-        try:
-            self.engine.say(text)
-            self.engine.runAndWait()
-        except RuntimeError:
-            pass

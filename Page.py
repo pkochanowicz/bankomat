@@ -1,53 +1,33 @@
 from tkinter import *
-from Image import ImageButton
+
 from ToolTip import ToolTip
 
-
 class Page():
-    @staticmethod
-    def find_default_images(): ##metoda zwracajaca domyslne elementy GUI jako słownik
-        global wplata_image,wyplata_image,stan_konta_image, interface_image, safety_image, button_test  # definicja zmiennych globalnych (PhotoImage Objects do not get garbage-collected)
-        wyplata_image = ImageButton.find_image("button_wyplata.png", 175, 47, "Wyjaśnienie funkcji wypłaty gotówki z bankomatu.")
-        wplata_image = ImageButton.find_image("button_wplata.png", 175, 47,"Wyjaśnienie funkcji wpłaty gotówki do bankomatu.")
-        stan_konta_image = ImageButton.find_image("button_stan.png", 175, 47, "Sprawdzanie stanu swojego konta bankowego.")
-        interface_image = ImageButton.find_image("button_interface.png", 175, 47, "Wyjaśnienie funkcji poszczególnych części fizycznych bankomatu.")
-        button_test = ImageButton.find_image("button_test.png", 72, 72, "Test wiedzy, sprawdzający zrozumienie zagadnień z instruktarzu.")
-        safety_image = ImageButton.find_image("button_exclamation.png", 72, 72, "Zasady bezpiecznego korzystania z bankomatu.")
-
-        return [wplata_image, wyplata_image, stan_konta_image, interface_image, button_test, safety_image]
+    buttons_images = None
+    root = None
+    background_image = None
 
     def create_tool_tip(self, widget, text):
         toolTip = ToolTip(widget)
 
         def enter(event):
-            toolTip.showtip(text)
+            toolTip.show_tip(text)
 
         def leave(event):
-            toolTip.hidetip()
+            toolTip.hide_tip()
 
         widget.bind('<Enter>', enter)
         widget.bind('<Leave>', leave)
 
-    def __init__(self):                 # konstruktor tworzący glowne okno aplikacji
-        root = Tk()
-        root.title("Nauka obsługi bankomatu")
-        root.geometry("700x792")
-        background_image = ImageButton.find_image("bckground.png", 792, 700, "")
-        background_label = Label(root, image=background_image['image'], width=background_image['x_size'],
-                                 height=background_image['y_size'])
-        background_label.place(x=0, y=0, relwidth=1, relheight=1)
-        self.create_launch_buttons(root)
-        root.mainloop()
-
-    def create_launch_buttons(self, window):    # funkcja tworząca przyciski symulujące bankomat
-        buttons_images = self.find_default_images()
-        buttons = [None] * len(buttons_images)
-        frames = [None] * len(buttons_images)
+    def create_buttons(self, window, buttons):    # funkcja tworząca przyciski symulujące bankomat
+        buttons = [None] * len(self.buttons_images)
+        frames = [None] * len(self.buttons_images)
         frame_position_x, frame_position_y = -25, 330
-        for i, image in enumerate(buttons_images):
+        for i, image in enumerate(self.buttons_images):
             frames[i] = Frame(window)
-            buttons[i] = Button(frames[i], image = image['image'])
+            buttons[i] = Button(frames[i], image=image['image'])
             buttons[i].pack()
+            # buttons[i]['command'] = lambda:
             self.create_tool_tip(buttons[i], image['hover_over_txt'])
 
             frames[i].pack()
@@ -55,13 +35,16 @@ class Page():
             frame_position_x += 240 - (image['x_size'] / 4)
             if image['x_size'] < 100:
                 frame_position_x += 25
-            frames[i].place(x=frame_position_x, y=frame_position_y, bordermode=OUTSIDE, width=image['x_size'], height=image['y_size'])
+            frames[i].place(x=frame_position_x, y=frame_position_y, bordermode=OUTSIDE, width=image['x_size'],
+                            height=image['y_size'])
             if i % 2:
                 frame_position_x = -25
                 frame_position_y += 95
+        # Page.clear_window(self.root)
 
-        def enter(self, event):
-            self.showtip()
+    @staticmethod
+    def clear_window(window):
+        window.pack_forget()
 
-        def leave(self, event):
-            self.hidetip()
+    def get_root(self):
+        return self.root
