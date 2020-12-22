@@ -1,7 +1,6 @@
 from tkinter import *
 
 from ToolTip import ToolTip
-from ButtonCommand import ButtonCommand
 
 
 class Page:
@@ -35,8 +34,7 @@ class Page:
             buttons[i].pack()
             if image['command']:
                 command = image['command'][0]
-                buttons[i]['command'] = lambda: ButtonCommand.withdraw(self.root)
-
+                buttons[i]['command'] = lambda: command(self.root)
 
             Page.create_tool_tip(buttons[i], image['hover_over_txt'])
 

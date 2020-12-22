@@ -20,7 +20,7 @@ class MainPage(Page):
 
     @staticmethod
     def find_main_page_images(): # metoda zwracajaca domyslne elementy GUI jako słownik
-        global wplata_image,wyplata_image,stan_konta_image, interface_image, safety_image, button_test  # definicja zmiennych globalnych (PhotoImage Objects do not get garbage-collected)
+        global wyplata_image,wplata_image,stan_konta_image, interface_image, safety_image, button_test  # definicja zmiennych globalnych (PhotoImage Objects do not get garbage-collected)
         wplata_image = ButtonImage.find_image("button_wplata.png", 175, 47,"Wyjaśnienie funkcji wpłaty gotówki do bankomatu.", ButtonCommand.withdraw)
         wyplata_image = ButtonImage.find_image("button_wyplata.png", 175, 47, "Wyjaśnienie funkcji wypłaty gotówki z bankomatu.")
         stan_konta_image = ButtonImage.find_image("button_stan.png", 175, 47, "Sprawdzanie stanu swojego konta bankowego.")
