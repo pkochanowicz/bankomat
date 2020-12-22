@@ -1,13 +1,16 @@
 from tkinter import *
 
 from ToolTip import ToolTip
+from ButtonCommand import ButtonCommand
 
-class Page():
+
+class Page:
     buttons_images = None
     root = None
     background_image = None
 
-    def create_tool_tip(self, widget, text):
+    @staticmethod
+    def create_tool_tip(widget, text):
         toolTip = ToolTip(widget)
 
         def enter(event):
@@ -19,6 +22,9 @@ class Page():
         widget.bind('<Enter>', enter)
         widget.bind('<Leave>', leave)
 
+    def get_root(self):
+        return self.root
+
     def create_buttons(self, window, buttons):    # funkcja tworząca przyciski symulujące bankomat
         buttons = [None] * len(self.buttons_images)
         frames = [None] * len(self.buttons_images)
@@ -27,8 +33,12 @@ class Page():
             frames[i] = Frame(window)
             buttons[i] = Button(frames[i], image=image['image'])
             buttons[i].pack()
-            # buttons[i]['command'] = lambda:
-            self.create_tool_tip(buttons[i], image['hover_over_txt'])
+            if image['command']:
+                command = image['command'][0]
+                buttons[i]['command'] = lambda: ButtonCommand.withdraw(self.root)
+
+
+            Page.create_tool_tip(buttons[i], image['hover_over_txt'])
 
             frames[i].pack()
             hover_over_label = Label(window, width=40)
@@ -41,10 +51,3 @@ class Page():
                 frame_position_x = -25
                 frame_position_y += 95
         # Page.clear_window(self.root)
-
-    @staticmethod
-    def clear_window(window):
-        window.pack_forget()
-
-    def get_root(self):
-        return self.root

@@ -2,6 +2,7 @@ from tkinter import *
 
 from Page import Page
 from ButtonImage import ButtonImage
+from ButtonCommand import ButtonCommand
 
 
 class MainPage(Page):
@@ -20,8 +21,8 @@ class MainPage(Page):
     @staticmethod
     def find_main_page_images(): # metoda zwracajaca domyslne elementy GUI jako słownik
         global wplata_image,wyplata_image,stan_konta_image, interface_image, safety_image, button_test  # definicja zmiennych globalnych (PhotoImage Objects do not get garbage-collected)
+        wplata_image = ButtonImage.find_image("button_wplata.png", 175, 47,"Wyjaśnienie funkcji wpłaty gotówki do bankomatu.", ButtonCommand.withdraw)
         wyplata_image = ButtonImage.find_image("button_wyplata.png", 175, 47, "Wyjaśnienie funkcji wypłaty gotówki z bankomatu.")
-        wplata_image = ButtonImage.find_image("button_wplata.png", 175, 47,"Wyjaśnienie funkcji wpłaty gotówki do bankomatu.")
         stan_konta_image = ButtonImage.find_image("button_stan.png", 175, 47, "Sprawdzanie stanu swojego konta bankowego.")
         interface_image = ButtonImage.find_image("button_interface.png", 175, 47, "Wyjaśnienie funkcji poszczególnych części fizycznych bankomatu.")
         button_test = ButtonImage.find_image("button_test.png", 72, 72, "Test wiedzy, sprawdzający zrozumienie zagadnień z instruktarzu.")
