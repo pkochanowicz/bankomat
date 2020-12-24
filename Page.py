@@ -1,5 +1,7 @@
+import os
 from tkinter import *
 
+from ButtonImage import ButtonImage
 from ToolTip import ToolTip
 
 
@@ -7,6 +9,7 @@ class Page:
     buttons_images = None
     root = None
     background_image = None
+    photos = []
 
     @staticmethod
     def create_tool_tip(widget, text):
@@ -24,28 +27,46 @@ class Page:
     def get_root(self):
         return self.root
 
-    def create_buttons(self, window, buttons):    # funkcja tworząca przyciski symulujące bankomat
-        buttons = [None] * len(self.buttons_images)
-        frames = [None] * len(self.buttons_images)
-        frame_position_x, frame_position_y = -25, 330
-        for i, image in enumerate(self.buttons_images):
-            frames[i] = Frame(window)
-            buttons[i] = Button(frames[i], image=image['image'])
-            buttons[i].pack()
-            if image['command']:
-                command = image['command'][0]
-                buttons[i]['command'] = lambda: command(self.root)
+    def find_path(self):
+        return os.path.abspath(os.path.dirname(__file__))
 
-            Page.create_tool_tip(buttons[i], image['hover_over_txt'])
+    def create_buttons(self, setup_txt):    # funkcja tworząca przyciski symulujące bankomat
+        buttons = [None] * len(setup_txt)
+        frames = [None] * len(setup_txt)
+        frame_position_x, frame_position_y = -25, 330
+        for i, image in enumerate(setup_txt):
+            frames[i] = Frame(self.root)
+            image = image.split(";")
+            self.photos.append(PhotoImage(file=os.path.join(self.find_path(), "img/" + image[4] + "/"+image[0])))
+            buttons[i] = Button(frames[i])
+            buttons[i].pack()
+            if image[4]:
+                command = getattr(self, image[4])
+                buttons[i]['command'] = lambda: command()
+                buttons[i]['image'] = self.photos[i]
+                buttons[i].pack()
+
+            Page.create_tool_tip(buttons[i], image[3])
 
             frames[i].pack()
-            hover_over_label = Label(window, width=40)
-            frame_position_x += 240 - (image['x_size'] / 4)
-            if image['x_size'] < 100:
+            hover_over_label = Label(self.root, width=40)
+            frame_position_x += 240 - (int(image[1]) / 4)
+            if int(image[1]) < 100:
                 frame_position_x += 25
-            frames[i].place(x=frame_position_x, y=frame_position_y, bordermode=OUTSIDE, width=image['x_size'],
-                            height=image['y_size'])
+            frames[i].place(x=frame_position_x, y=frame_position_y, bordermode=OUTSIDE, width=int(image[1]),
+                            height=int(image[2]))
             if i % 2:
                 frame_position_x = -25
                 frame_position_y += 95
         # Page.clear_window(self.root)
+
+    def withdraw(self):
+        self.clear_root()
+        self.photos = []
+        welcome_txt, setup_txt = ButtonImage.find_action_buttons('withdraw')
+        self.create_buttons(setup_txt)
+
+    def clear_root(self):
+        for i, child in enumerate(self.root.winfo_children()):
+            if i > 0:
+                child.destroy()

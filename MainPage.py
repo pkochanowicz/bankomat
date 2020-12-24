@@ -1,4 +1,5 @@
 from tkinter import *
+import os
 
 from Page import Page
 from ButtonImage import ButtonImage
@@ -15,11 +16,9 @@ class MainPage(Page):
         background_label = Label(self.root, image=self.background_image['image'], width=self.background_image['x_size'],
                                  height=self.background_image['y_size'])
         background_label.place(x=0, y=0, relwidth=1, relheight=1)
-        self.buttons_images = self.find_main_page_images()
-        self.create_buttons(self.root, self.find_main_page_images())
+        self.withdraw()
 
-    @staticmethod
-    def find_main_page_images(): # metoda zwracajaca domyslne elementy GUI jako słownik
+    def find_main_page_images(self): # metoda zwracajaca domyslne elementy GUI jako słownik
         global wyplata_image,wplata_image,stan_konta_image, interface_image, safety_image, button_test  # definicja zmiennych globalnych (PhotoImage Objects do not get garbage-collected)
         wplata_image = ButtonImage.find_image("button_wplata.png", 175, 47,"Wyjaśnienie funkcji wpłaty gotówki do bankomatu.", ButtonCommand.withdraw)
         wyplata_image = ButtonImage.find_image("button_wyplata.png", 175, 47, "Wyjaśnienie funkcji wypłaty gotówki z bankomatu.")
@@ -29,3 +28,4 @@ class MainPage(Page):
         safety_image = ButtonImage.find_image("button_exclamation.png", 72, 72, "Zasady bezpiecznego korzystania z bankomatu.")
 
         return [wplata_image, wyplata_image, stan_konta_image, interface_image, button_test, safety_image]
+
