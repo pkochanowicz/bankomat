@@ -1,1 +1,7 @@
 Oto ekran g³ówny bankomatu. Poni¿sze przyciski demonstruj¹ mo¿liwe operacje, które mo¿na wykonaæ przy u¿yciu bankomatu.
+01-button_wyplata.png;175;47;Wyjaœnienie funkcji wp³aty gotówki do bankomatu;withdraw
+02-button_wplata.png;175;47;Wyjaœnienie funkcji wyp³aty gotówki z bankomatu
+03-button_stan.png;175;47;Sprawdzanie stanu swojego konta bankowego
+04-button_interface.png;175;47;Wyjaœnienie funkcji poszczególnych czêœci fizycznych bankomatu.
+05-button_test.png;72;72;Test wiedzy, sprawdzaj¹cy zrozumienie zagadnieñ z instruktarzu.
+06-button_exclamation.png;72;72;Zasady bezpiecznego korzystania z bankomatu.

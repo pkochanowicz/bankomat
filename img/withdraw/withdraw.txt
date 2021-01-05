@@ -1,7 +1,7 @@
-welcome_txt='Po nacisniêciu przycisku "wyp³ata gotówki" wyœwietli siê ekran, na którym mo¿na bêdzie wybraæ po¿¹dan¹ kwotê. W przypadku potrzeby wyjêcia innej iloœci gotówki nale¿y klikn¹æ na przycisk "inna kwota".'
-00-button_20.png;175;47;"Po naciœniêciu przycisku wyp³acona zostanie dana kwota.";withdraw; 
-02-button_50.png;175;47;"Po naciœniêciu przycisku wyp³acona zostanie dana kwota.";withdraw;
-03-button_100.png;175;47;"Po naciœniêciu przycisku wyp³acona zostanie dana kwota.";withdraw; 
-04-button_200.png;175;47;"Po naciœniêciu przycisku wyp³acona zostanie dana kwota.";withdraw; 
-05-button_500.png;175;47;"Po naciœniêciu przycisku wyp³acona zostanie dana kwota.";withdraw;
-06-button_inna_kwota.png;175;47;"Po naciœniêciu przycisku wyp³acona zostanie dana kwota.";withdraw; 
+Po nacisniêciu przycisku "wyp³ata gotówki" wyœwietli siê ekran, na którym mo¿na bêdzie wybraæ po¿¹dan¹ kwotê. W przypadku potrzeby wyjêcia innej iloœci gotówki nale¿y klikn¹æ na przycisk "inna kwota".
+00-button_20.png;175;47;Po naciœniêciu przycisku wyp³acona zostanie dana kwota.
+02-button_50.png;175;47;Po naciœniêciu przycisku wyp³acona zostanie dana kwota.
+03-button_100.png;175;47;Po naciœniêciu przycisku wyp³acona zostanie dana kwota.
+04-button_200.png;175;47;Po naciœniêciu przycisku wyp³acona zostanie dana kwota.
+05-button_500.png;175;47;Po naciœniêciu przycisku wyp³acona zostanie dana kwota.
+06-button_inna_kwota.png;175;47;"Po naciœniêciu przycisku wyp³acona zostanie dana kwota.

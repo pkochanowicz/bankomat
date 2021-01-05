@@ -30,20 +30,20 @@ class Page:
     def find_path(self):
         return os.path.abspath(os.path.dirname(__file__))
 
-    def create_buttons(self, setup_txt):    # funkcja tworząca przyciski symulujące bankomat
+    def create_buttons(self, setup_txt, current_action):    # funkcja tworząca przyciski symulujące bankomat
         buttons = [None] * len(setup_txt)
         frames = [None] * len(setup_txt)
         frame_position_x, frame_position_y = -25, 330
         for i, image in enumerate(setup_txt):
             frames[i] = Frame(self.root)
             image = image.split(";")
-            self.photos.append(PhotoImage(file=os.path.join(self.find_path(), "img/" + image[4] + "/"+image[0])))
+            self.photos.append(PhotoImage(file=os.path.join(self.find_path(), "img/" + current_action + "/"+image[0])))
             buttons[i] = Button(frames[i])
             buttons[i].pack()
-            if image[4]:
-                command = getattr(self, image[4])
-                buttons[i]['command'] = lambda: command()
-                buttons[i]['image'] = self.photos[i]
+            buttons[i]['image'] = self.photos[i]
+            if len(image) > 4 and image[4]:
+                action_name = image[4].split('\n')[0]
+                buttons[i]['command'] = lambda: self.run_action(action_name)
                 buttons[i].pack()
 
             Page.create_tool_tip(buttons[i], image[3])
@@ -60,11 +60,11 @@ class Page:
                 frame_position_y += 95
         # Page.clear_window(self.root)
 
-    def withdraw(self):
+    def run_action(self, action):
         self.clear_root()
         self.photos = []
-        welcome_txt, setup_txt = ButtonImage.find_action_buttons('withdraw')
-        self.create_buttons(setup_txt)
+        welcome_txt, setup_txt = ButtonImage.find_action_buttons(action)
+        self.create_buttons(setup_txt, action)
 
     def clear_root(self):
         for i, child in enumerate(self.root.winfo_children()):

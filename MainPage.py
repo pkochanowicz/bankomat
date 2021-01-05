@@ -3,7 +3,6 @@ import os
 
 from Page import Page
 from ButtonImage import ButtonImage
-from ButtonCommand import ButtonCommand
 
 
 class MainPage(Page):
@@ -16,7 +15,7 @@ class MainPage(Page):
         background_label = Label(self.root, image=self.background_image['image'], width=self.background_image['x_size'],
                                  height=self.background_image['y_size'])
         background_label.place(x=0, y=0, relwidth=1, relheight=1)
-        self.withdraw()
+        self.run_action('main')
 
     def find_main_page_images(self): # metoda zwracajaca domyslne elementy GUI jako słownik
         global wyplata_image,wplata_image,stan_konta_image, interface_image, safety_image, button_test  # definicja zmiennych globalnych (PhotoImage Objects do not get garbage-collected)
