@@ -15,7 +15,7 @@ class ButtonImage:
         return image_dict
 
     @staticmethod
-    def find_action_buttons(action):
+    def find_action_elements(action):
         my_path = os.path.abspath(os.path.dirname(__file__))
         filelist = os.listdir(os.path.join(my_path, 'img/' + action + '/'))
         setup_file = None

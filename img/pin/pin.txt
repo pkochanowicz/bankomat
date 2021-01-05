@@ -1,0 +1,2 @@
+Przed przejœciem do wykonania operacji nale¿y wpisaæ czterocyfrowy kod Pin przy pomocy klawiatury.
+01-keyboard.png;271;129;Kod pin nale¿y wpisaæ przy pomocy klawiatury znajduj¹cej siê pod ekranem.;entry
